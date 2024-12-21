@@ -1,0 +1,28 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+    #csrf_protection: true
+    http_method_override: false
+
+    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    # Remove or comment this section to explicitly disable session support.
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: none
+        storage_factory_id: session.storage.factory.native
+        # This determines the lifetime of the session - in seconds.
+        # Setting this value to 0 means the cookie is valid for the length of the browser session.
+        # If not set, php.ini's session.cookie_lifetime directive will be relied on.
+        cookie_lifetime: 0
+
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

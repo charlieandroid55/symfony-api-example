@@ -1,0 +1,126 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "doctrine/annotations": "^2.0",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.12",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.16.2",
+        "gesdinet/jwt-refresh-token-bundle": "^1.3",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "nelmio/cors-bundle": "^2.5",
+        "phpdocumentor/reflection-docblock": "^5.4",
+        "phpstan/phpdoc-parser": "^1.29",
+        "symfony/asset": "6.4.*",
+        "symfony/console": "6.4.*",
+        "symfony/dotenv": "6.4.*",
+        "symfony/expression-language": "6.4.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "6.4.*",
+        "symfony/google-mailer": "6.4.*",
+        "symfony/http-client": "6.4.*",
+        "symfony/intl": "6.4.*",
+        "symfony/mailer": "6.4.*",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/property-access": "6.4.*",
+        "symfony/property-info": "6.4.*",
+        "symfony/proxy-manager-bridge": "6.4.*",
+        "symfony/runtime": "6.4.*",
+        "symfony/security-bundle": "6.4.*",
+        "symfony/serializer": "6.4.*",
+        "symfony/translation": "6.4.*",
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
+        "symfony/yaml": "6.4.*"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "lexik:jwt:generate-keypair --overwrite": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "phpunit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php vendor/bin/phpunit --coverage-text --coverage-clover=tests/coverage.xml"
+        ],
+        "php-cs-fixer": [
+            "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src"
+        ],
+        "phpstan": [
+            "@php bin/console cache:warmup --env=dev",
+            "@php bin/console cache:warmup --env=test",
+            "@phpstan-general",
+            "@phpstan-tests"
+        ],
+        "phpstan-general": "vendor/bin/phpstan analyse -c phpstan.neon src --level 7 --no-progress",
+        "phpstan-tests": "vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.4.*",
+            "docker": true
+        }
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "phpstan/phpstan": "^1.11",
+        "phpstan/phpstan-doctrine": "^1.4",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "phpstan/phpstan-symfony": "^1.4",
+        "phpunit/phpunit": "^11.2",
+        "symfony/browser-kit": "6.4.*",
+        "symfony/css-selector": "6.4.*",
+        "symfony/maker-bundle": "^1.60",
+        "symfony/phpunit-bridge": "^6.0"
+    }
+}

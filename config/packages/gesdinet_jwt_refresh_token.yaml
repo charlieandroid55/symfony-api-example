@@ -1,0 +1,15 @@
+gesdinet_jwt_refresh_token:
+  refresh_token_class: App\Entity\Security\RefreshToken
+  ttl : 604800 # 7 days
+  ttl_update: true
+  return_expiration: true
+  single_use: true
+  cookie:
+    enabled: true               
+    same_site: none               
+    path: /                      
+    domain: null                 
+    http_only: true              
+    secure: true                 
+    partitioned: true           
+    remove_token_from_body: false 
